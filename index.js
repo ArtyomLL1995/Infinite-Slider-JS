@@ -1,14 +1,22 @@
-const initialImgWidth = 60 // Frame width in rem
-const initialImgHeight = 22 // Frame height in rem
+const HEIGHT_UNIT = 'rem'
+const UNIT = '%'
+const initialImgWidth = 80 // Frame width in UNIT
+const initialImgHeight = 25 // Frame height in HEIGHT_UNIT
 const amountOfPicturesInSlide = 4 // Number of visible pictures in frame
 const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) should not be greater than the whole number of images
 const speed = 400 // Scroll speed in ms
 const prev = document.querySelector('.prev')
 const next = document.querySelector('.next')
 const sliderTrack = document.querySelector('.slider-track')
+const wrapper = document.querySelector('.wrapper')
 const transitionTimingFunction = 'cubic-bezier(0, 0, 0.58, 1.0)'
 const numberOfInitialDrownSlides = amountOfPicturesInSlide + (amountOfSlidesPerSlide * 2)
-const imgWidth = initialImgWidth / amountOfPicturesInSlide
+let imgWidth
+if (UNIT != '%') {
+    imgWidth = initialImgWidth / amountOfPicturesInSlide
+} else {
+    imgWidth = 100 / amountOfPicturesInSlide
+}
 const images = [
     './numbers/1.png',
     './numbers/2.png',
@@ -35,7 +43,8 @@ let marginLeft
 let indexNext = images.length - amountOfSlidesPerSlide
 let indexPrev = amountOfPicturesInSlide + amountOfSlidesPerSlide
 let slideSwitcher = true
-sliderTrack.style.width = initialImgWidth + 'rem'
+
+wrapper.style.width = initialImgWidth + UNIT
 
 const displayedImages = []
 
@@ -44,7 +53,7 @@ function drawInitialImages() {
     for (let i = 0; i < numberOfInitialDrownSlides; i++) {
         if (index === images.length) index = 0
         const img = drawNewImg(index)
-        if (i === 0) img.style.marginLeft = -(imgWidth * amountOfSlidesPerSlide) + 'rem'
+        if (i === 0) img.style.marginLeft = -(imgWidth * amountOfSlidesPerSlide) + UNIT
         displayedImages.push(img)
         sliderTrack.append(img)
         index++
@@ -53,7 +62,7 @@ function drawInitialImages() {
 
 function slideNext() {
     if (slideSwitcher) {
-        changeFirstImageStyle('0rem')
+        changeFirstImageStyle('0' + UNIT)
         setTimeout(() => {
             for (let i = 0; i < amountOfSlidesPerSlide; i++) {
                 indexNext -= 1
@@ -75,7 +84,7 @@ function slideNext() {
 
 function slidePrev() {
     if (slideSwitcher) {
-        changeFirstImageStyle(-imgWidth * (2 * amountOfSlidesPerSlide) + 'rem')
+        changeFirstImageStyle(-imgWidth * (2 * amountOfSlidesPerSlide) + UNIT)
         setTimeout(() => {
             for (let i = 0; i < amountOfSlidesPerSlide; i++) {
                 indexPrev += 1
@@ -104,7 +113,7 @@ function changeFirstImageStyle(left) {
 
 function finishAnimation() {
     displayedImages[0].style.transition = 0 + 's'
-    displayedImages[0].style.marginLeft = -imgWidth * amountOfSlidesPerSlide + 'rem'
+    displayedImages[0].style.marginLeft = -imgWidth * amountOfSlidesPerSlide + UNIT
     slideSwitcher = true
 }
 
@@ -153,8 +162,8 @@ function handleMouseUp(event) {
 function drawNewImg(index) {
     const img = document.createElement('img')
     img.src = images[index]
-    img.style.width = imgWidth + 'rem'
-    img.style.height = initialImgHeight + 'rem'
+    img.style.width = imgWidth + UNIT
+    img.style.height = initialImgHeight + HEIGHT_UNIT
     return img
 }
 
