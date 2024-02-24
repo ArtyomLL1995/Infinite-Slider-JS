@@ -53,10 +53,7 @@ function drawInitialImages() {
 
 function slideNext() {
     if (slideSwitcher) {
-        slideSwitcher = false
-        displayedImages[0].style.transition = speed + 'ms'
-        displayedImages[0].style.transitionTimingFunction = transitionTimingFunction;
-        displayedImages[0].style.marginLeft = 0 + 'rem'
+        changeFirstImageStyle('0rem')
         setTimeout(() => {
             for (let i = 0; i < amountOfSlidesPerSlide; i++) {
                 indexNext -= 1
@@ -69,8 +66,7 @@ function slideNext() {
                 displayedImages.pop()
                 sliderTrack.prepend(img)
             }
-            displayedImages[0].style.marginLeft = -(imgWidth * amountOfSlidesPerSlide) + 'rem'
-            slideSwitcher = true
+            finishAnimation()
         }, speed)
     } else {
         return
@@ -79,12 +75,11 @@ function slideNext() {
 
 function slidePrev() {
     if (slideSwitcher) {
-        slideSwitcher = false
-        displayedImages[0].style.transition = speed + 'ms'
-        displayedImages[0].style.transitionTimingFunction = transitionTimingFunction;
-        displayedImages[0].style.marginLeft = -imgWidth * (2 * amountOfSlidesPerSlide) + 'rem'
+        changeFirstImageStyle(-imgWidth * (2 * amountOfSlidesPerSlide) + 'rem')
         setTimeout(() => {
             for (let i = 0; i < amountOfSlidesPerSlide; i++) {
+                indexPrev += 1
+                indexNext += 1
                 if (indexPrev > images.length - 1) indexPrev = 0
                 if (indexNext > images.length - 1) indexNext = 0
                 displayedImages[0].remove() 
@@ -92,16 +87,25 @@ function slidePrev() {
                 displayedImages.push(img)
                 displayedImages.shift()
                 sliderTrack.append(img)
-                indexPrev += 1
-                indexNext += 1
             }
-            displayedImages[0].style.transition = 0 + 's'
-            displayedImages[0].style.marginLeft = -imgWidth * amountOfSlidesPerSlide + 'rem'
-            slideSwitcher = true
+            finishAnimation()
         }, speed)
     } else {
         return
     }
+}
+
+function changeFirstImageStyle(left) {
+    slideSwitcher = false
+    displayedImages[0].style.transition = speed + 'ms'
+    displayedImages[0].style.transitionTimingFunction = transitionTimingFunction;
+    displayedImages[0].style.marginLeft = left
+}
+
+function finishAnimation() {
+    displayedImages[0].style.transition = 0 + 's'
+    displayedImages[0].style.marginLeft = -imgWidth * amountOfSlidesPerSlide + 'rem'
+    slideSwitcher = true
 }
 
 function handleMouseDown(event) {
