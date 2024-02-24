@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.slider-track {
+    white-space: nowrap;
+    overflow: hidden;
+}
+img {
+    object-fit: cover;
+}
+i {
+    position: absolute;
+    top: 50%; 
+    transform: translate(0, -50%);
+    font-size: 45px;
+    cursor: pointer;
+    transition: 100ms;
+}
+i:hover {
+    color: grey;
+}
+.next {
+    right: -60px;
+}
+.prev {
+    left: -60px;
+}
+.wrapper {
+    position: relative;
+}

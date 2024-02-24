@@ -168,13 +168,20 @@ function handleSlide(callback) {
     }
 }
 
+function handleKeyPress(event) {
+    if (event.key === 'ArrowRight') {
+        slideNext()
+    } else if (event.key === 'ArrowLeft') {
+        slidePrev()
+    }
+}
+
 drawInitialImages()
 next.addEventListener('click', slideNext)
 prev.addEventListener('click', slidePrev)
 sliderTrack.addEventListener('mousedown', handleMouseDown)
 sliderTrack.addEventListener('mousemove', handleMouseMove)
 window.addEventListener('mouseup', handleMouseUp)
+window.addEventListener('keydown', handleKeyPress)
 
 // add touch event handling
-
-// ssh-add ~/.ssh/id_ed25519
