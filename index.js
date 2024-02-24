@@ -1,5 +1,5 @@
 const initialImgWidth = 60 // Frame width in rem
-const initialImgHeight = 40 // Frame height in rem
+const initialImgHeight = 20 // Frame height in rem
 const amountOfPicturesInSlide = 4 // Number of visible pictures in frame
 const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) should not be greater than the whole number of images
 const speed = 400 // Scroll speed in ms
@@ -10,17 +10,16 @@ const transitionTimingFunction = 'cubic-bezier(0, 0, 0.58, 1.0)'
 const numberOfInitialDrownSlides = amountOfPicturesInSlide + (amountOfSlidesPerSlide * 2)
 const imgWidth = initialImgWidth / amountOfPicturesInSlide
 const images = [
-    './pictures/1.jpg',
-    './pictures/2.jpg',
-    './pictures/4.jpg', 
-    './pictures/5.jpg', 
-    './pictures/6.jpg', 
-    './pictures/7.jpg', 
-    './pictures/8.jpg', 
-    './pictures/9.jpg',
-    './pictures/10.jpg',
-    './pictures/11.jpg',
-    './pictures/12.jpg'
+    './numbers/1.png',
+    './numbers/2.png',
+    './numbers/3.png', 
+    './numbers/4.png', 
+    './numbers/5.png', 
+    './numbers/6.png', 
+    './numbers/7.png', 
+    './numbers/8.png',
+    './numbers/9.png',
+    './numbers/10.png'
 ]
 const initialCoords = {
     x : 0
