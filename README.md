@@ -1,1 +1,2 @@
-# Infinite-Slider-JS
+# infininite-slider-JS
+Infinite slider on pure js
