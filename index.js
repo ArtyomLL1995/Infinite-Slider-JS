@@ -1,5 +1,5 @@
 const initialImgWidth = 60 // Frame width in rem
-const initialImgHeight = 20 // Frame height in rem
+const initialImgHeight = 22 // Frame height in rem
 const amountOfPicturesInSlide = 4 // Number of visible pictures in frame
 const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) should not be greater than the whole number of images
 const speed = 400 // Scroll speed in ms
