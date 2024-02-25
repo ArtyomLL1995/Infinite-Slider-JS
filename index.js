@@ -1,8 +1,8 @@
 const HEIGHT_UNIT = 'rem'
 const UNIT = '%'
 const ENDLESS_SLIDER  = false
-const initialImgWidth = 50 // Frame width in UNIT
-const initialImgHeight = 10 // Frame height in HEIGHT_UNIT
+const initialImgWidth = 90 // Frame width in UNIT
+const initialImgHeight = 25 // Frame height in HEIGHT_UNIT
 const amountOfPicturesInSlide = 3 // Number of visible pictures in frame
 const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) must not be greater than the whole number of images
 const speed = 400 // Scroll speed in ms
@@ -90,9 +90,14 @@ function slideNext() {
                 finishAnimation()
             }, speed)
         } else {
-            if (currentMarginLeftOffset < 0) {
+            if (Math.floor(currentMarginLeftOffset) < 0) {
                 changeFirstImageStyle((currentMarginLeftOffset + (imgWidth * amountOfSlidesPerSlide)) + UNIT)
                 currentMarginLeftOffset += imgWidth * amountOfSlidesPerSlide
+                setTimeout(() => {
+                    slideSwitcher = true
+                }, speed)
+            } else if (Math.floor(currentMarginLeftOffset) === 0) {
+                changeFirstImageStyle(0 + UNIT)
                 setTimeout(() => {
                     slideSwitcher = true
                 }, speed)
@@ -120,7 +125,7 @@ function slidePrev() {
                 finishAnimation()
             }, speed)
         } else {
-            if (currentMarginLeftOffset <= 0 && Math.abs(currentMarginLeftOffset) < Math.abs(imgWidth * images.length) - Math.abs(imgWidth * amountOfPicturesInSlide)) {
+            if (Math.floor(currentMarginLeftOffset) <= 0 && Math.abs(currentMarginLeftOffset) < Math.abs(imgWidth * images.length) - Math.abs(imgWidth * amountOfPicturesInSlide)) {
 
                 changeFirstImageStyle((currentMarginLeftOffset - (imgWidth * amountOfSlidesPerSlide)) + UNIT)
 
@@ -138,6 +143,11 @@ function slidePrev() {
                         displayedImages.push(image)
                         sliderTrack.append(image)
                     })
+                    slideSwitcher = true
+                }, speed)
+            } else {
+                changeFirstImageStyle(currentMarginLeftOffset + UNIT)
+                setTimeout(() => {
                     slideSwitcher = true
                 }, speed)
             }
@@ -178,7 +188,9 @@ function handleMouseMove(event) {
         if (mouseClickedOnTheElement) {
             currentCoords.x = event.pageX
             mouseRelativePosition = parseInt(currentCoords.x) - parseInt(initialCoords.x)
-            displayedImages[0].style.marginLeft = (parseInt(marginLeft) + mouseRelativePosition) + 'px'
+            if (Math.abs(mouseRelativePosition) < sliderTrack.offsetWidth / 2) {
+                displayedImages[0].style.marginLeft = (parseInt(marginLeft) + mouseRelativePosition) + 'px'
+            }
         }
     }
 }
@@ -189,6 +201,7 @@ function handleMouseUp(event) {
         event.stopPropagation();
         touchEndTime = Date.parse(new Date)
         if (mouseClickedOnTheElement) {
+            console.log('mouseRelativePosition: ', mouseRelativePosition)
             if (mouseRelativePosition > 0) {
                 handleSlide(slideNext)
             } else {
@@ -223,15 +236,15 @@ function handleSlide(callback) {
 
 function handleKeyPress(event) {
     if (event.key === 'ArrowRight') {
-        slideNext()
-    } else if (event.key === 'ArrowLeft') {
         slidePrev()
+    } else if (event.key === 'ArrowLeft') {
+        slideNext()
     }
 }
 
 drawInitialImages()
-next.addEventListener('click', slideNext)
-prev.addEventListener('click', slidePrev)
+next.addEventListener('click', slidePrev)
+prev.addEventListener('click', slideNext)
 sliderTrack.addEventListener('mousedown', handleMouseDown)
 sliderTrack.addEventListener('mousemove', handleMouseMove)
 window.addEventListener('mouseup', handleMouseUp)
