@@ -1,10 +1,10 @@
 const HEIGHT_UNIT = 'rem'
 const UNIT = '%'
 const ENDLESS_SLIDER  = false
-const initialImgWidth = 20 // Frame width in UNIT
+const initialImgWidth = 50 // Frame width in UNIT
 const initialImgHeight = 10 // Frame height in HEIGHT_UNIT
-const amountOfPicturesInSlide = 2 // Number of visible pictures in frame
-const amountOfSlidesPerSlide = 1 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) must not be greater than the whole number of images
+const amountOfPicturesInSlide = 3 // Number of visible pictures in frame
+const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) must not be greater than the whole number of images
 const speed = 400 // Scroll speed in ms
 const prev = document.querySelector('.prev')
 const next = document.querySelector('.next')
@@ -120,10 +120,10 @@ function slidePrev() {
                 finishAnimation()
             }, speed)
         } else {
-            if (currentMarginLeftOffset <= 0) {
+            if (currentMarginLeftOffset <= 0 && Math.abs(currentMarginLeftOffset) < Math.abs(imgWidth * images.length) - Math.abs(imgWidth * amountOfPicturesInSlide)) {
 
                 changeFirstImageStyle((currentMarginLeftOffset - (imgWidth * amountOfSlidesPerSlide)) + UNIT)
-                
+
                 currentMarginLeftOffset -= imgWidth * amountOfSlidesPerSlide
                 
                 setTimeout(() => {

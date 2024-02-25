@@ -7,7 +7,7 @@ body {
 .slider-track {
     white-space: nowrap;
     border: 1px solid grey;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 img {
     object-fit: cover;
