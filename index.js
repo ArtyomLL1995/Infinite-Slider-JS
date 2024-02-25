@@ -1,8 +1,8 @@
 const HEIGHT_UNIT = 'rem'
 const UNIT = '%'
 const ENDLESS_SLIDER  = false
-const initialImgWidth = 90 // Frame width in UNIT
-const initialImgHeight = 25 // Frame height in HEIGHT_UNIT
+const initialImgWidth = 70 // Frame width in UNIT
+const initialImgHeight = 30 // Frame height in HEIGHT_UNIT
 const amountOfPicturesInSlide = 3 // Number of visible pictures in frame
 const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) must not be greater than the whole number of images
 const speed = 400 // Scroll speed in ms
@@ -201,7 +201,6 @@ function handleMouseUp(event) {
         event.stopPropagation();
         touchEndTime = Date.parse(new Date)
         if (mouseClickedOnTheElement) {
-            console.log('mouseRelativePosition: ', mouseRelativePosition)
             if (mouseRelativePosition > 0) {
                 handleSlide(slideNext)
             } else {
