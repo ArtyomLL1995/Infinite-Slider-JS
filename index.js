@@ -1,6 +1,6 @@
 const HEIGHT_UNIT = 'rem'
 const UNIT = '%'
-const ENDLESS_SLIDER  = false
+const ENDLESS_SLIDER  = true
 const initialImgWidth = 70 // Frame width in UNIT
 const initialImgHeight = 30 // Frame height in HEIGHT_UNIT
 const amountOfPicturesInSlide = 3 // Number of visible pictures in frame
