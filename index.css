@@ -6,8 +6,8 @@ body {
 }
 .slider-track {
     white-space: nowrap;
-    overflow: hidden;
     border: 1px solid grey;
+    /* overflow: hidden; */
 }
 img {
     object-fit: cover;
@@ -24,10 +24,10 @@ i:hover {
     color: grey;
 }
 .next {
-    right: -60px;
+    right: -30px;
 }
 .prev {
-    left: -60px;
+    left: -30px;
 }
 .wrapper {
     position: relative;
