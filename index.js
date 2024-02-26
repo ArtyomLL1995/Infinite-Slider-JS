@@ -1,7 +1,7 @@
 const HEIGHT_UNIT = 'rem'
 const UNIT = '%'
 const ENDLESS_SLIDER  = true
-const initialImgWidth = 70 // Frame width in UNIT
+const initialImgWidth = 60 // Frame width in UNIT
 const initialImgHeight = 30 // Frame height in HEIGHT_UNIT
 const amountOfPicturesInSlide = 3 // Number of visible pictures in frame
 const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) must not be greater than the whole number of images
@@ -93,15 +93,12 @@ function slideNext() {
             if (Math.floor(currentMarginLeftOffset) < 0) {
                 changeFirstImageStyle((currentMarginLeftOffset + (imgWidth * amountOfSlidesPerSlide)) + UNIT)
                 currentMarginLeftOffset += imgWidth * amountOfSlidesPerSlide
-                setTimeout(() => {
-                    slideSwitcher = true
-                }, speed)
             } else if (Math.floor(currentMarginLeftOffset) === 0) {
                 changeFirstImageStyle(0 + UNIT)
-                setTimeout(() => {
-                    slideSwitcher = true
-                }, speed)
             }
+            setTimeout(() => {
+                slideSwitcher = true
+            }, speed)
         }
     }
 }
@@ -130,27 +127,24 @@ function slidePrev() {
                 changeFirstImageStyle((currentMarginLeftOffset - (imgWidth * amountOfSlidesPerSlide)) + UNIT)
 
                 currentMarginLeftOffset -= imgWidth * amountOfSlidesPerSlide
-                
-                setTimeout(() => {
-                    const newImages = []
-                    for (let i = displayedImages.length; i < displayedImages.length + amountOfSlidesPerSlide; i++) {
-                        if (images[i]) {
-                            const img = drawNewImg(i)
-                            newImages.push(img)
-                        }
+
+                const newImages = []
+                for (let i = displayedImages.length; i < displayedImages.length + amountOfSlidesPerSlide; i++) {
+                    if (images[i]) {
+                        const img = drawNewImg(i)
+                        newImages.push(img)
                     }
-                    newImages.forEach(image => {
-                        displayedImages.push(image)
-                        sliderTrack.append(image)
-                    })
-                    slideSwitcher = true
-                }, speed)
+                }
+                newImages.forEach(image => {
+                    displayedImages.push(image)
+                    sliderTrack.append(image)
+                })
             } else {
                 changeFirstImageStyle(currentMarginLeftOffset + UNIT)
-                setTimeout(() => {
-                    slideSwitcher = true
-                }, speed)
             }
+            setTimeout(() => {
+                slideSwitcher = true
+            }, speed)
         }
     }
 }

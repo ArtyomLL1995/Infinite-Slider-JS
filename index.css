@@ -10,7 +10,7 @@ body {
     overflow: hidden;
 }
 img {
-    object-fit: cover;
+    object-fit: contain;
 }
 i {
     position: absolute;
