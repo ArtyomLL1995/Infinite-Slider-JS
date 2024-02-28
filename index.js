@@ -1,51 +1,8 @@
-const HEIGHT_UNIT = 'rem'
-const UNIT = '%'
-const ENDLESS_SLIDER  = true
-const initialImgWidth = 60 // Frame width in UNIT
-const initialImgHeight = 30 // Frame height in HEIGHT_UNIT
-const amountOfPicturesInSlide = 3 // Number of visible pictures in frame
-const amountOfSlidesPerSlide = 2 // Amount of scrolled pictures per one slide. (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) must not be greater than the whole number of images
-const speed = 400 // Scroll speed in ms
 const prev = document.querySelector('.prev')
 const next = document.querySelector('.next')
 const sliderTrack = document.querySelector('.slider-track')
-const wrapper = document.querySelector('.wrapper')
-const transitionTimingFunction = 'cubic-bezier(0, 0, 0.58, 1.0)'
 
-const numberOfInitialDrownSlides = amountOfPicturesInSlide + (amountOfSlidesPerSlide * 2)
-
-const imgWidth = UNIT != '%' ? initialImgWidth / amountOfPicturesInSlide : 100 / amountOfPicturesInSlide
-
-const images = [
-    './numbers/1.png',
-    './numbers/2.png',
-    './numbers/3.png', 
-    './numbers/4.png', 
-    './numbers/5.png', 
-    './numbers/6.png', 
-    './numbers/7.png',
-    './numbers/8.png',
-    './numbers/9.png'
-]
-
-const initialCoords = {
-    x : 0
-}
-const currentCoords = {
-    x : 0
-}
-let touchStartTime
-let touchEndTime
-let mouseRelativePosition = 0
-let mouseClickedOnTheElement = false
-let marginLeft
-let indexNext = images.length - amountOfSlidesPerSlide
-let indexPrev = amountOfPicturesInSlide + amountOfSlidesPerSlide
 let slideSwitcher = true
-
-let currentMarginLeftOffset = 0
-
-wrapper.style.width = initialImgWidth + UNIT
 
 const displayedImages = []
 
@@ -235,7 +192,6 @@ function handleKeyPress(event) {
     }
 }
 
-drawInitialImages()
 next.addEventListener('click', slidePrev)
 prev.addEventListener('click', slideNext)
 sliderTrack.addEventListener('mousedown', handleMouseDown)

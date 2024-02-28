@@ -8,6 +8,46 @@
         <title>Document</title>
     </head>
     <body>
+        <div id="settings">
+            <div>
+                Infinite slider
+                <input type="checkbox" id="infinite">
+            </div>
+            <div>
+                Slider Width
+                <input type="number" style="width: 50px" id="slider width">
+                <select id="width unit">
+                    <option value="%">%</option>
+                    <option value="px">px</option>
+                    <option value="rem">rem</option>
+                    <option value="em">em</option>
+                </select>
+            </div>
+            <div>
+                Slider Height
+                <input type="number" style="width: 50px" id="slider height">
+                <select id="height unit">
+                    <option value="px">px</option>
+                    <option value="rem">rem</option>
+                    <option value="em">em</option>
+                </select>
+            </div>
+            <div>
+                Slides In Frame
+                <input type="number" style="width: 50px" id="slides in frame">
+            </div>
+            <div>
+                Slides Per Slide
+                <input type="number" style="width: 50px" id="slides per slide">
+            </div>
+            <div>
+                Speed
+                <input type="number" style="width: 50px" id="slider speed">
+            </div>
+            <div>
+                <button id="save settings">Apply</button>
+            </div>
+        </div>
         <div class="wrapper">
             <div class="slider-track"></div>
             <i class="fa-solid fa-caret-left prev"></i>
@@ -15,5 +55,6 @@
         </div>
     </body>
     <script src="index.js"></script>
+    <script src="settings.js"></script>
     <script src="https://kit.fontawesome.com/8c0db15180.js" crossorigin="anonymous"></script>
 </html>
