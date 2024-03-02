@@ -15,8 +15,6 @@ let initialImgHeight
 // Number of visible pictures in frame
 let amountOfPicturesInSlide
 
-// Amount of scrolled pictures per one slide. 
-// (amountOfPicturesInSlide + amountOfSlidesPerSlide*2) must not be greater than the whole number of images
 let amountOfSlidesPerSlide
 
 // Scroll speed in ms

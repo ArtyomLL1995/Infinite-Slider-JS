@@ -125,7 +125,7 @@ function handleMouseDown(event) {
         event.stopPropagation();
         touchStartTime = Date.parse(new Date)
         displayedImages[0].style.transition = 0 + 'ms'
-        initialCoords.x = event.pageX
+        initialCoords.x = event.changedTouches ? event.changedTouches[0].pageX : event.pageX
         const style = displayedImages[0].currentStyle || window.getComputedStyle(displayedImages[0]);
         marginLeft = style.marginLeft
         mouseClickedOnTheElement = true
@@ -137,7 +137,7 @@ function handleMouseMove(event) {
         event.preventDefault();
         event.stopPropagation();
         if (mouseClickedOnTheElement) {
-            currentCoords.x = event.pageX
+            currentCoords.x = event.changedTouches ? event.changedTouches[0].pageX : event.pageX
             mouseRelativePosition = parseInt(currentCoords.x) - parseInt(initialCoords.x)
             if (Math.abs(mouseRelativePosition) < sliderTrack.offsetWidth / 2) {
                 displayedImages[0].style.marginLeft = (parseInt(marginLeft) + mouseRelativePosition) + 'px'
@@ -196,7 +196,10 @@ next.addEventListener('click', slidePrev)
 prev.addEventListener('click', slideNext)
 sliderTrack.addEventListener('mousedown', handleMouseDown)
 sliderTrack.addEventListener('mousemove', handleMouseMove)
+sliderTrack.addEventListener('touchstart', handleMouseDown)
+sliderTrack.addEventListener('touchmove', handleMouseMove)
 window.addEventListener('mouseup', handleMouseUp)
+window.addEventListener('touchend', handleMouseUp)
 window.addEventListener('keydown', handleKeyPress)
 
 // add touch event handling

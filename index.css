@@ -40,4 +40,5 @@ i:hover {
     display: flex;
     gap: 30px;
     padding: 15px;
+    z-index : 1;
 }
