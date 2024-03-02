@@ -102,10 +102,42 @@ function getSettingsFromTheDatabase() {
             request.result?.speed
         )
         drawInitialImages()
+        setSettingsToInputs()
     };
     request.onerror = function() {
         console.error("Error gettings settings", request.error);
     };
+}
+
+function saveSettingsToTheDatabase(reload = true) {
+
+    const transaction = database.transaction(SLIDER_SETTINGS, "readwrite")
+
+    const sliderSettings = transaction.objectStore(SLIDER_SETTINGS)
+
+    const settings = {
+        key : 1,
+        loop : document.getElementById('infinite').checked,
+        width : document.getElementById('slider width').value,
+        widthUnit : document.getElementById('width unit').value,
+        height : document.getElementById('slider height').value,
+        heightUnit : document.getElementById('height unit').value,
+        slidesInFrame : document.getElementById('slides in frame').value,
+        slidesPerSlide : document.getElementById('slides per slide').value,
+        speed : document.getElementById('slider speed').value
+    }
+
+    const request = sliderSettings.put(settings)
+
+    request.onsuccess = function() {
+        if (reload) {
+            window.location.reload()
+        }
+    }
+    
+    request.onerror = function() {
+        alert('Error saving settins')
+    }
 }
 
 function setInitialSettings(loop, width, widthUnit, height, heightUnit, slidesInFrame, slidesPerSlide, sp) {
@@ -127,4 +159,19 @@ function setInitialSettings(loop, width, widthUnit, height, heightUnit, slidesIn
     indexPrev = amountOfPicturesInSlide + amountOfSlidesPerSlide
 
     wrapper.style.width = initialImgWidth + UNIT
+}
+
+function setSettingsToInputs() {
+    document.getElementById('infinite').checked = ENDLESS_SLIDER
+    document.getElementById('slider width').value = initialImgWidth
+    document.getElementById('width unit').value = UNIT
+    document.getElementById('slider height').value = initialImgHeight
+    document.getElementById('height unit').value = HEIGHT_UNIT
+    document.getElementById('slides in frame').value = amountOfPicturesInSlide
+    document.getElementById('slides per slide').value = amountOfSlidesPerSlide
+    document.getElementById('slider speed').value = speed
+}
+
+function refreshSettings() {
+    saveSettingsToTheDatabase()
 }
