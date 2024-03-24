@@ -8,6 +8,8 @@ const displayedImages = []
 
 function drawInitialImages() {
     let index = indexNext
+    console.log('indexNext: ', indexNext)
+    console.log('slides: ', numberOfInitialDrownSlides)
     for (let i = 0; i < numberOfInitialDrownSlides; i++) {
         if (ENDLESS_SLIDER) {
             if (index === images.length) {

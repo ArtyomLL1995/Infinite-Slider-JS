@@ -148,13 +148,13 @@ function setInitialSettings(loop, width, widthUnit, height, heightUnit, slidesIn
     amountOfSlidesPerSlide = slidesPerSlide !== undefined ? slidesPerSlide : 2
     speed = sp !== undefined ? sp : 400
 
-    numberOfInitialDrownSlides = amountOfPicturesInSlide + (amountOfSlidesPerSlide * 2)
+    numberOfInitialDrownSlides = Number(amountOfPicturesInSlide) + Number((amountOfSlidesPerSlide * 2))
 
     imgWidth = UNIT != '%' ? initialImgWidth / amountOfPicturesInSlide : 100 / amountOfPicturesInSlide
 
     indexNext = images.length - amountOfSlidesPerSlide
 
-    indexPrev = amountOfPicturesInSlide + amountOfSlidesPerSlide
+    indexPrev = Number(amountOfPicturesInSlide) + Number(amountOfSlidesPerSlide)
 
     wrapper.style.width = initialImgWidth + UNIT
 }
