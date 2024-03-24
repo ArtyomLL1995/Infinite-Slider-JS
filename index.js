@@ -165,9 +165,11 @@ function handleMouseUp(event) {
 
 function drawNewImg(index) {
     const img = document.createElement('img')
-    img.src = images[index]
-    img.style.width = imgWidth + UNIT
-    img.style.height = initialImgHeight + HEIGHT_UNIT
+    if (images[index]) {
+        img.src = images[index]
+        img.style.width = imgWidth + UNIT
+        img.style.height = initialImgHeight + HEIGHT_UNIT
+    }
     return img
 }
 
